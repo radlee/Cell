@@ -1,11 +1,6 @@
-Faceblock
-Instagram
-Tooth
-Tooter
-LankedOn
-Snaptalk
-Blocked
-SnapChops
-Fact
-Instatly
-Tooth
+var waltersApps = "“Hello. I’ve got Faceblock and Instantgam. I’m too old for the other ones.”"
+var jessesApps = "“Yo! I’ve got ‘em all. Tooter, Faceblock, Instantgam, Snaptalk.”"
+var saulsApps = "“I’m on LankedOn for Business. And I have an Instantgam account for my cats. Oh, and Faceblock for my ex-husbands.”"
+var gussApps = "“I use Tooter and Instantgam. My customers aren’t on the others, so I can’t get them to engage with my brand there.”"
+
+
