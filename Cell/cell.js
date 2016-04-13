@@ -1,39 +1,7 @@
-var allUsers = [];
-
-var walter = "Walter sent: “It was 67MB. Is that everything? I’m busy, you know.”"
-var jesse = "Jesse sent: “Damn, it was like 300MB. Dat Snaptalk is a data hog, yo.”"
-var saul = "Saul sent: “I think 283MB. That’s what the guy at the store said. I think it means MegaBites.”"
-var gus = "Gus sent: “Around 150MB. I have the receipts if you need more precise figures.”"
-
 var waltersApps = "“Hello. I’ve got Faceblock and Instantgam. I’m too old for the other ones.”"
 var jessesApps = "“Yo! I’ve got ‘em all. Tooter, Faceblock, Instantgam, Snaptalk.”"
 var saulsApps = "“I’m on LankedOn for Business. And I have an Instantgam account for my cats. Oh, and Faceblock for my ex-husbands.”"
 var gussApps = "“I use Tooter and Instantgam. My customers aren’t on the others, so I can’t get them to engage with my brand there.”"
-
-allUsers.push(walter)
-allUsers.push(jesse)
-allUsers.push(saul)
-allUsers.push(gus)
-
-//Splits every user's line of string with a provided separator
-var splitString = function(stringToSplit, separator){
-	var arrayOfStrings = stringToSplit.split(separator);
-	return arrayOfStrings;
-}
-
-console.log("\nName and Data --->")
-allUsers.forEach(function(user){
-	//Strips Out Name and DATA and returns an Object---
-	var getNamesAndData = function(user){
-		var arrString = user.split(' ');
-		return {
-			name : arrString[0],
-			data :user.replace(/\D/g, '')
-		}
-	}
-	var user = getNamesAndData(user);
-	console.log(user)
-})
 
 var Tooter = "Tooter"
 var Snaptalk = "Snaptalk"
@@ -41,49 +9,85 @@ var LankedOn = "LankedOn"
 var Faceblock = "Faceblock"
 var Instantgam = "Instantgam"
 
-//Function that returns an Array of Apps for a specified Customer
-
-var getApps = function(appsString){
-	//Returns an Array of words----['word1', 'word2.', 'word3,']----
-	var string = splitString(appsString, ' ');
-	//Remove all panctuation from the string for Walter
-	var cleanString =[];
-	var string = splitString(appsString, ' ');
-	var removed = string.map(function(word){
-		var cleanWord = word.replace(/[.”,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-		var cleanWord = cleanWord.replace(/\s+/g,"");
-		cleanString.push(cleanWord);
-	})
-		//store Apps for the Customer
-		var appsList = [];
-		console.log("\n|--Apps!--->")
-		console.log("-----------<")
-		var words = cleanString.map(function(word){
-			if(word === "Faceblock"){
-				appsList.push(word)
-			}
-			if(word === "Instantgam"){
-				appsList.push(word)
-			}
-			if(word === "LankedOn"){
-				appsList.push(word)
-			}
-			if(word === "Snaptalk"){
-				appsList.push(word)
-			}
-			if(word === "Tooter"){
-				appsList.push(word)
-			}
-	})
-	return {
-		apps :  appsList
+var fs = require('fs');
+//Read lines Asynchronously------------------------
+fs.readFile("input.txt", 'utf8', function(err, data){
+	if(err) throw err;
+	//Splits every user's line of string with a provided separator
+	var splitString = function(stringToSplit, separator){
+		var arrayOfStrings = stringToSplit.split(separator);
+		return arrayOfStrings;
 	}
-}
+	var allUsers = splitString(data, '\n')
+	// console.log(allUsers)
 
-var theApps = getApps(jessesApps);
-console.log(theApps);
+	console.log("\nName and Data --->")
+	var customersInfo = [];
+	allUsers.forEach(function(user){
+		//Strips Out Name and DATA and returns an Object---
+		var getNamesAndData = function(user){
+			var arrString = user.split(' ');
+			return {
+				name : arrString[0],
+				data :user.replace(/\D/g, '')
+			}
+		}
+		var user = getNamesAndData(user);
+		customersInfo.push(user)
+		// console.log(user)
+	})
+	console.log(customersInfo)
 
-console.log(theApps.apps[0]);
+	console.log(customersInfo[3].data)
+
+
+	//Function that returns an Array of Apps for a specified Customer
+
+	var getApps = function(appsString){
+		//Returns an Array of words----['word1', 'word2.', 'word3,']----
+		var string = splitString(appsString, ' ');
+		//Remove all panctuation from the string for Walter
+		var cleanString =[];
+		var string = splitString(appsString, ' ');
+		var removed = string.map(function(word){
+			var cleanWord = word.replace(/[.”,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+			var cleanWord = cleanWord.replace(/\s+/g,"");
+			cleanString.push(cleanWord);
+		})
+			//store Apps for the Customer
+			var appsList = [];
+			console.log("\n|--Apps!--->")
+			console.log("-----------<")
+			var words = cleanString.map(function(word){
+				if(word === "Faceblock"){
+					appsList.push(word)
+				}
+				if(word === "Instantgam"){
+					appsList.push(word)
+				}
+				if(word === "LankedOn"){
+					appsList.push(word)
+				}
+				if(word === "Snaptalk"){
+					appsList.push(word)
+				}
+				if(word === "Tooter"){
+					appsList.push(word)
+				}
+		})
+		return {
+			apps :  appsList
+		}
+	}
+
+	var theApps = getApps(jessesApps);
+	console.log(theApps);
+
+	console.log(theApps.apps[0]);
+
+
+});
+
 
 
 //------------------------------------------------------------------------
